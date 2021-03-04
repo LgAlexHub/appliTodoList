@@ -1,13 +1,12 @@
 <template>
     <div>
         <sidebar></sidebar>
-        <liste>
+        <liste></liste>
     </div>
 </template>
 
 <script>
 import Sidebar from '../components/sidebar.vue';
-import { mapGetters} from "vuex";
 import Liste from '../components/liste.vue';
 
 export default {
@@ -15,10 +14,6 @@ export default {
         Sidebar,
         Liste
     },
-    computed: {
-        ...mapGetters("todolist", ["listes"])
-    },
-
 
 }
 </script>
