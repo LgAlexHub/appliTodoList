@@ -1,5 +1,7 @@
 // Faire les import des views/composants
-import Home from "../components/Home";
+import Home from '../views/Home'
+import Login from '../views/Login'
+
 import { createWebHistory, createRouter } from "vue-router";
 
 const routes =
@@ -8,6 +10,11 @@ const routes =
             path:'/home',
             name : 'home',
             component: Home
+        },
+        {
+            path: '/login',
+            name: 'login',
+            component: Login
         }
     ]
 const router = createRouter({
