@@ -1,45 +1,32 @@
 <template>
-  <label for="filtre">Filtre : </label>
-  <select name="filtre" id="filtre" v-model="filter">
-    <option value="all">Tout</option>
-    <option value="checked">Terminé</option>
-    <option value="not_checked">Non terminé</option>    
-  </select>
+  <div>
+    <label for="filtre">Filtre : </label>
+    <select name="filtre" id="filtre" v-model="filter">
+      <option value="all">Tout</option>
+      <option value="checked">Terminé</option>
+      <option value="not_checked">Non terminé</option>    
+    </select>
 
-  <ul>
-    <li v-for="(todo, index) in filtrer" v-bind:key="todo.id">
-      <label :for="todo.id">{{ todo.name }}</label>
-      <input type="checkbox" :id="todo.id" v-model="todo.completed">
-      <button @click="suppr(index)">Suppr</button>
-    </li>
-  </ul>
+    <ul>
+      <li>
+        <todo></todo>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
+import Todo from './Todo.vue'
 
 export default {
   data() {
     return {
-      todos: [
-      {
-        id: 1,
-        name : 'tache 1',
-        completed : false
-      },
-      {
-        id: 2,
-        name : 'tache 2',
-        completed: true
-      }
-      ],
-      newTodo: '',
-      filter: 'all',
+      id: 1,
+      nom: 'liste 1'
     }
   },
-  methods: {
-    suppr(index) {
-      this.todos.splice(index, 1);
-    }
+  components: {
+    Todo
   },
   computed: {
     filtrer() {
