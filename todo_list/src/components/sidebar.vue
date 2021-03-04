@@ -5,15 +5,19 @@
                 <button>{{ liste.nom }}</button>
             </li>
         </ul>
+        <button @click="newListe()">+</button>
     </div>
 </template>
 
 <script>
-import { mapGetters} from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
     computed: {
         ...mapGetters("todolist", ["listes"])
+    },
+    methods: {
+      ...mapActions("todolist", ['newListe'])
     },
 }
 </script>
