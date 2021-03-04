@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>{{ liste.name }}</h1>
     <label for="filtre">Filtre : </label>
     <select name="filtre" id="filtre" v-model="filter">
       <option value="all">Tout</option>
@@ -8,27 +9,31 @@
     </select>
 
     <ul>
-      <li>
-        <todo></todo>
+      <li v-for="todo in liste.todos" v-bind:key="todo.id">
+        {{ todo.name }}
+        <input type="checkbox" v-model="todo.checked">
+        <button @click="modif()">Modif</button>
+        <button @click="suppr()">Suppr</button>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-import Todo from './Todo.vue'
 
 export default {
-  data() {
-    return {
-      id: 1,
-      nom: 'liste 1'
-    }
-  },
-  components: {
-    Todo
+  props: {
+    id: {type: String, default: "1"}
   },
   computed: {
+    ...mapGetters("todolist", ["getListe"]),
+
+     liste() {
+         return this.getListe(this.id)
+     },
+
+
+
     filtrer() {
       let res;
       if(this.filter == "all") {
