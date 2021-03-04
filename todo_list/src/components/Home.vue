@@ -10,6 +10,7 @@
 
 <script>
 import List from './List.vue'
+import { mapGetters} from "vuex";
 export default {
     components: { 
       List

@@ -1,6 +1,8 @@
 // Faire les import des views/composants
+import Home from "../components/Home";
+import { createWebHistory, createRouter } from "vue-router";
 
-const router = new VueRouter(
+const routes =
     [
         {
             path:'/home',
@@ -8,6 +10,9 @@ const router = new VueRouter(
             component: Home
         }
     ]
-)
+const router = createRouter({
+    history: createWebHistory(process.env.BASE_URL),
+    routes,
+});
 
 export default router;
