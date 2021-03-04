@@ -1,6 +1,6 @@
 // Faire les import des views/composants
-import Home from '../views/home'
-import Login from '../views/login'
+import Home from "../views/home.vue"
+import Login from '../views/login.vue'
 
 import { createWebHistory, createRouter } from "vue-router";
 
