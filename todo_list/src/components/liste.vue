@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h1>{{ liste.name }}</h1>
+    <input v-model="todoText" type="text"/>
+    <button @click="new_Todo(todoText)">Add todo</button><br>
     <label for="filtre">Filtre : </label>
     <select name="filtre" id="filtre" v-model="filter">
       <option value="all">Tout</option>
@@ -9,8 +10,8 @@
     </select>
 
     <ul>
-      <li v-for="todo in liste.todos" v-bind:key="todo.id">
-        {{ todo.name }}
+      <li v-for="todo in allTodos" v-bind:key="todo.id">
+        {{ todo.title }}
         <input type="checkbox" v-model="todo.checked">
         <button @click="modif()">Modif</button>
         <button @click="suppr()">Suppr</button>
@@ -20,20 +21,20 @@
 </template>
 
 <script>
-import { mapGetters} from "vuex";
+import { mapActions, mapGetters} from "vuex";
 
 export default {
+  data(){
+    return {
+      todoText: ""
+    }
+  },
   props: {
     id: {type: String, default: "1"}
   },
   computed: {
-    ...mapGetters("todolist", ["getListe"]),
-
-     liste() {
-         return this.getListe(this.id)
-     },
-
-
+    ...mapGetters("todolist", ["getListe", "allTodos"]),
+    ...mapActions("todolist", ['new_Todo']),
 
     filtrer() {
       let res;

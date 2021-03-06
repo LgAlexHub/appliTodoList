@@ -5,7 +5,7 @@
                 <button>{{ liste.nom }}</button>
             </li>
         </ul>
-        <button @click="newListe()">+</button>
+        <button @click="newListe()">Ajouter une liste</button>
     </div>
 </template>
 
