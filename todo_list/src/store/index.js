@@ -5,11 +5,19 @@ import todolist from './todolist';
 
 export default createStore({
     debug : true,
-    todos:[
-    {
-        id:1,
-        title:"One"
-    }],
+    state:{
+        todos:[
+            {
+                id:1,
+                title:"One"
+            },
+            {
+                id:2,
+                title:"Coucou"
+            }
+        ]
+
+    },
     modules: {
         account,
         todolist

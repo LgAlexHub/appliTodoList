@@ -8,7 +8,9 @@ export function newListe() {
 }
 
 export function newTodo(state, todo){
-    console.log(todo)
-    state.todos.push(todo);
-    console.log(todo)
+    state.todolists.push({id: state.nb_id++, title:todo} );
+}
+
+export function suppTodo(state, id){
+    state.todolists = state.todolists.filter(todo => todo.id != id);
 }
