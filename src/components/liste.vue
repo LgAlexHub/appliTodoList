@@ -34,15 +34,15 @@ export default {
       todoText: "",
     }
   },
-
-  props: {
-    id: {type: String, default: "1"}
-  },
   methods:{
       ...mapActions("todolist", ['new_Todo', 'supp_Todo']),
   },
   computed: {
-    ...mapGetters("todolist", ["getListe", "allTodos", "filtrer"]),
+    ...mapGetters("todolist", ["getListe", "filtrer"]),
+
+    liste() {
+      return this.getListe();
+    }
   }
 }
 </script>

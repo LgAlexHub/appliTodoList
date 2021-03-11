@@ -1,13 +1,9 @@
-export function listes() {
-    
-}
-
-export const allTodos = (state) => {
+export function getAllListes (state) {
     return state.todolists;
 }
 
-export const getListe = (state) => (id) => {
-    return state.properties.find((todolist) => todolist.id === id);
+export const getListe = (state) => {
+    return state.todolists.find((todolist) => todolist.id === state.current_list);
 }
 
 export const filtrer = (state) => (id) => {

@@ -1,15 +1,16 @@
 <template>
     <div>
-        <div class="list">
-            <ul>
-                <li v-for="liste in listes" v-bind:key="liste.id" class="item">
-                    <button @click="setCurrentList(liste.id)">{{ liste.nom }}</button>
-                </li>
-            </ul>
-        </div>
         <div>
             <input v-model="listeText" type="text"/>
             <button @click="newListe(listeText)">Add todo</button><br>
+        </div>
+        
+        <div class="list">
+            <ul>
+                <li v-for="liste in getAllListes" v-bind:key="liste.id" class="item">
+                    <button @click="setCurrentList(liste.id)">{{ liste.title }}</button>
+                </li>
+            </ul>
         </div>
     </div>
 </template>
@@ -24,7 +25,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters("todolist", ["listes"])
+        ...mapGetters("todolist", ["getAllListes"]),
     },
     methods: {
       ...mapActions("todolist", ['newListe', 'setCurrentList']),
