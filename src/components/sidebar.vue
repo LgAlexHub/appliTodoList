@@ -1,11 +1,16 @@
 <template>
     <div>
-        <ul>
-            <li v-for="liste in listes" v-bind:key="liste.id">
-                <button>{{ liste.nom }}</button>
-            </li>
-        </ul>
-        <button @click="newListe()">Ajouter une liste</button>
+        <div class="list">
+            <ul>
+                <li v-for="liste in listes" v-bind:key="liste.id" class="item">
+                    <button>{{ liste.nom }}</button>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <input v-model="listeText" type="text"/>
+            <button @click="newListe(listeText)">Add todo</button><br>
+        </div>
     </div>
 </template>
 
@@ -13,6 +18,11 @@
 import { mapGetters, mapActions } from "vuex";
 
 export default {
+    data() {
+        return {
+            listeText: "",
+        }
+    },
     computed: {
         ...mapGetters("todolist", ["listes"])
     },
@@ -21,3 +31,18 @@ export default {
     },
 }
 </script>
+
+<style>
+.item {
+   margin-top: 10px;
+   border-top: 1px solid black;
+   padding-top: 10px;
+}
+
+.item:first-child {
+   margin-top: 0;
+   border-top: none;
+   padding-top: 0;
+}
+
+</style>
