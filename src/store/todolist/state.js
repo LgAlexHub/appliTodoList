@@ -5,7 +5,7 @@ export default function () {
         filter:"all",
         todolists: [
             {
-                'id': 1,
+                'id': 0,
                 'title': 'liste_1',
                 'todos': [
                     {

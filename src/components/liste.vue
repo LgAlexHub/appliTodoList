@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div v-if="liste!=null">
+    <h1>{{ liste.title }}</h1>
     <div>
       <label for="filtre">Filtre : </label>
       <select name="filtre" id="filtre" v-model="filter">
@@ -14,7 +15,7 @@
     </form>
     <div class="list">
       <ul>
-        <li v-for="todo in filtrer(id)" v-bind:key="todo.id">
+        <li v-for="todo in filtrer" v-bind:key="todo.id" class="item">
           {{ todo.title }}
           <input type="checkbox" v-model="todo.completed">
           <button @click="modif()">Modifier</button>
@@ -32,6 +33,7 @@ export default {
   data(){
     return {
       todoText: "",
+      filter: 'all',
     }
   },
   methods:{
@@ -41,12 +43,39 @@ export default {
     ...mapGetters("todolist", ["getListe", "filtrer"]),
 
     liste() {
-      return this.getListe();
+      return this.getListe;
+    },
+
+    filtrer() {
+      let res;
+      let todos = this.getListe.todos;
+      if(this.filter == "all") {
+        res = todos;
+      } else if(this.filter == "completed") {
+        res = [];
+        todos.forEach(element => {
+          if(element.completed) {
+            res.push(element);
+          }
+        });
+      } else if(this.filter == "not_completed") {
+        res = [];
+        todos.forEach(element => {
+          if(!element.completed) {
+            res.push(element);
+          }
+        });
+      }
+      return res;
     }
   }
 }
 </script>
 
 <style>
-
+.item:not(first-child) {
+    margin-top: 10px;
+    border-top: 1px solid black;
+    padding-top: 10px;
+}
 </style>
