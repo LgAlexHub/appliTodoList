@@ -1,23 +1,27 @@
 <template>
   <div>
-    <input v-model="todoText" type="text"/>
-    <button @click="new_Todo(todoText)">Add todo</button><br>
-    
-    <label for="filtre">Filtre : </label>
-    <select name="filtre" id="filtre" v-model="filter">
-      <option value="all">Tout</option>
-      <option value="checked">Terminé</option>
-      <option value="not_checked">Non terminé</option>    
-    </select>
-
-    <ul>
-      <li v-for="todo in allTodos" v-bind:key="todo.id">
-        {{ todo.title }}
-        <input type="checkbox" v-model="todo.checked">
-        <button @click="modif()">Modifier</button>
-        <button @click="supp_Todo(todo.id)">Supprimer</button>
-      </li>
-    </ul>
+    <div>
+      <label for="filtre">Filtre : </label>
+      <select name="filtre" id="filtre" v-model="filter">
+        <option value="all">Tout</option>
+        <option value="checked">Terminé</option>
+        <option value="not_checked">Non terminé</option>    
+      </select>
+    </div>
+    <div>
+      <input v-model="todoText" type="text"/>
+      <button @click="new_Todo(todoText)">Add todo</button><br>
+    </div>
+    <div class="list">
+      <ul>
+        <li v-for="todo in allTodos" v-bind:key="todo.id">
+          {{ todo.title }}
+          <input type="checkbox" v-model="todo.checked">
+          <button @click="modif()">Modifier</button>
+          <button @click="supp_Todo(todo.id)">Supprimer</button>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
