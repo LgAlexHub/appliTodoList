@@ -4,7 +4,7 @@ var authToken = null;
 module.exports={
     getAxiosClient :async function getAxiosClient(path, method) {
         let baseUrl = 'http://138.68.74.39/api/'
-        let config =authToken!= null ? 
+        let config = authToken!= null ? 
         {
             method: method,
             url: baseUrl + path,
@@ -30,6 +30,7 @@ module.exports={
             console.log(`${email} Registerd`)
         } catch (err) {
             console.error(err);
+            return null;
         }
     },
     login:async function login(email, password) {
@@ -41,6 +42,7 @@ module.exports={
             console.log(`${email} Logged`)
         } catch (err) {
             console.error(err);
+            return null;
         }
     
     },
