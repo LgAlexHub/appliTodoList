@@ -4,19 +4,19 @@
       <label for="filtre">Filtre : </label>
       <select name="filtre" id="filtre" v-model="filter">
         <option value="all">Tout</option>
-        <option value="checked">Terminé</option>
-        <option value="not_checked">Non terminé</option>    
+        <option value="completed">Terminé</option>
+        <option value="not_completed">Non terminé</option>    
       </select>
     </div>
-    <div>
+    <form>
       <input v-model="todoText" type="text"/>
       <button @click="new_Todo(todoText)">Add todo</button><br>
-    </div>
+    </form>
     <div class="list">
       <ul>
-        <li v-for="todo in allTodos" v-bind:key="todo.id">
+        <li v-for="todo in filtrer(id)" v-bind:key="todo.id">
           {{ todo.title }}
-          <input type="checkbox" v-model="todo.checked">
+          <input type="checkbox" v-model="todo.completed">
           <button @click="modif()">Modifier</button>
           <button @click="supp_Todo(todo.id)">Supprimer</button>
         </li>
@@ -42,29 +42,7 @@ export default {
       ...mapActions("todolist", ['new_Todo', 'supp_Todo']),
   },
   computed: {
-    ...mapGetters("todolist", ["getListe", "allTodos"]),
-
-    filtrer() {
-      let res;
-      if(this.filter == "all") {
-        res = this.todos;
-      } else if(this.filter == "checked ") {
-        res = [];
-        this.todos.forEach(element => {
-          if(element.completed) {
-            res.push(element);
-          }
-        });
-      } else if(this.filter == "not_checked") {
-        res = [];
-        this.todos.forEach(element => {
-          if(!element.completed) {
-            res.push(element);
-          }
-        });
-      }
-      return res;
-    }
+    ...mapGetters("todolist", ["getListe", "allTodos", "filtrer"]),
   }
 }
 </script>
