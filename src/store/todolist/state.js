@@ -1,5 +1,6 @@
 export default function () {
     return {
+        current_list:null,
         nb_id:3,
         filter:"all",
         todolists: [

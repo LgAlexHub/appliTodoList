@@ -3,7 +3,7 @@
         <div class="list">
             <ul>
                 <li v-for="liste in listes" v-bind:key="liste.id" class="item">
-                    <button>{{ liste.nom }}</button>
+                    <button @click="setCurrentList(liste.id)">{{ liste.nom }}</button>
                 </li>
             </ul>
         </div>
@@ -27,7 +27,8 @@ export default {
         ...mapGetters("todolist", ["listes"])
     },
     methods: {
-      ...mapActions("todolist", ['newListe'])
+      ...mapActions("todolist", ['newListe']),
+      ...mapActions("todolist", ['setCurrentList'])
     },
 }
 </script>
