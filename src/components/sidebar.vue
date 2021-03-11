@@ -33,16 +33,10 @@ export default {
 </script>
 
 <style>
-.item {
-   margin-top: 10px;
-   border-top: 1px solid black;
-   padding-top: 10px;
-}
-
-.item:first-child {
-   margin-top: 0;
-   border-top: none;
-   padding-top: 0;
+.item:not(first-child) {
+    margin-top: 10px;
+    border-top: 1px solid black;
+    padding-top: 10px;
 }
 
 </style>
