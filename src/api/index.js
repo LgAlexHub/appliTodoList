@@ -41,7 +41,7 @@ module.exports={
             return  response;
 
         } catch (err) {
-            console.error(err);
+            //console.error(err);
             return err.response;
         }
     

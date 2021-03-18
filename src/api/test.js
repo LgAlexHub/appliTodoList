@@ -1,6 +1,8 @@
 const api = require('./index');
 
 (async function () {
-   let res = await api.register('test','test@test.fr','123456789');
-   console.log(JSON.stringify(res,null,2));
+   let res = await api.login('21801364@etu.unicaen.fr','thomasLePluBo');
+   console.log(res);
+   //let res2 = await api.getTodoList(res);
+   //console.log(JSON.stringify(res2,null,2));
 }());
