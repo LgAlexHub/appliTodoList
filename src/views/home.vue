@@ -1,4 +1,10 @@
 <template>
+    <div v-if="isLoged" class="utilBar">
+      <button v-on:click="logout()">Logout</button>
+    </div>
+    <div v-else>
+      <router-link to="/login"><button class="utilBar">Login</button></router-link>
+    </div>
     <div>
         <div class="sidebar">
             <sidebar/>
@@ -12,15 +18,20 @@
 <script>
 import Sidebar from '@/components/sidebar.vue';
 import Liste from '@/components/liste.vue';
+import { mapGetters, mapActions} from "vuex";
 
 export default {
     components: { 
         Sidebar,
         Liste
+    },
+    computed:{
+      ...mapGetters("account",["getToken","isLoged"])
+    },
+    methods:{
+      ...mapActions("account",["logout"])
     }
-    ,mounted() {
-      console.log(localStorage.token)
-    }
+
 }
 </script>
 
@@ -43,4 +54,9 @@ export default {
   padding: 0px 10px;
 }
 
+.utilBar
+{
+  margin-left: 20%;
+  align-items: end;
+}
 </style>

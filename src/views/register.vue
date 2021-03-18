@@ -1,0 +1,33 @@
+<template>
+  <div v-if="this.message!==''">
+    {{this.message}}
+  </div>
+  <div>
+    <label for="name">Nom :<input id="name" type="text" v-model="name"></label><br>
+    <label for="email">Email :<input type="text" id="email" v-model="email"></label><br>
+    <label for="password">Mot de passe :<input type="password" v-model="password" id="password"></label><br>
+    <button v-on:click="registerFeedback({name:this.name,email:this.email,password:this.password})">Register</button><br>
+  </div>
+</template>
+<script>
+  import { mapActions} from "vuex";
+  export default {
+    data(){
+      return{
+        name:"",
+        password: "",
+        email: "",
+        message: ""
+      }
+    },
+    methods:{
+      ...mapActions("account",["register"]),
+      registerFeedback(data)
+      {
+        this.register(data).then(res=>{
+          this.message=res
+        })
+      }
+    }
+  }
+</script>
