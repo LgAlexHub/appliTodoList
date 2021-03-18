@@ -5,8 +5,11 @@
 </template>
 
 <script>
-
+import M from 'materialize-css'
 export default {
-  name: 'App'
+  name: 'App',
+  mounted () {
+    M.AutoInit()
+  }
 }
 </script>

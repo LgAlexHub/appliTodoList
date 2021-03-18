@@ -1,16 +1,19 @@
 <template>
-    <div v-if="isLoged" class="utilBar">
-      <button v-on:click="logout()">Logout</button>
-    </div>
-    <div v-else>
-      <router-link to="/login"><button class="utilBar">Login</button></router-link>
-    </div>
-    <div>
-        <div class="sidebar">
-            <sidebar/>
-        </div>
-        <div class="liste">
-            <liste/>
+    <nav style="margin-bottom: 10px; padding-right: 5px" class="teal lighten-3">
+      <div class="nav-wrapper ">
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li v-if="isLoged"><a class="waves-effect waves-light btn" v-on:click="logout()">Logout</a></li>
+          <li v-else><router-link to="/login">Login</router-link></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="row">
+      <div class="col s2">
+        <sidebar/>
+      </div>
+      <div class="col s1"></div>
+        <div class="col s6">
+          <liste/>
         </div>
     </div>
 </template>
@@ -19,6 +22,7 @@
 import Sidebar from '@/components/sidebar.vue';
 import Liste from '@/components/liste.vue';
 import { mapGetters, mapActions} from "vuex";
+import M from "materialize-css";
 
 export default {
     components: { 
@@ -30,6 +34,9 @@ export default {
     },
     methods:{
       ...mapActions("account",["logout"])
+    },
+    mounted () {
+      M.AutoInit()
     }
 
 }

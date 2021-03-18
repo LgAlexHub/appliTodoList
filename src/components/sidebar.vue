@@ -2,13 +2,13 @@
     <div>
         <div>
             <input v-model="listeText" type="text"/>
-            <button @click="newListe(listeText)">Add todo</button><br>
+            <button class="waves-effect waves-light btn" @click="newListe(listeText)">Add todo</button><br>
         </div>
         
         <div class="list">
             <ul>
                 <li v-for="liste in getAllListes" v-bind:key="liste.id" class="item">
-                    <button @click="setCurrentList(liste.id)">{{ liste.title }}</button>
+                    <button class="waves-effect waves-light btn" @click="setCurrentList(liste.id)">{{ liste.title }}</button>
                 </li>
             </ul>
         </div>
@@ -25,6 +25,7 @@ export default {
         }
     },
     computed: {
+        ...mapGetters("account",["isLoged"]),
         ...mapGetters("todolist", ["getAllListes"]),
     },
     methods: {
@@ -32,12 +33,3 @@ export default {
     },
 }
 </script>
-
-<style>
-.item:not(first-child) {
-    margin-top: 10px;
-    border-top: 1px solid black;
-    padding-top: 10px;
-}
-
-</style>

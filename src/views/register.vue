@@ -2,11 +2,25 @@
   <div v-if="this.message!==''">
     {{this.message}}
   </div>
-  <div>
-    <label for="name">Nom :<input id="name" type="text" v-model="name"></label><br>
-    <label for="email">Email :<input type="text" id="email" v-model="email"></label><br>
-    <label for="password">Mot de passe :<input type="password" v-model="password" id="password"></label><br>
-    <button v-on:click="registerFeedback({name:this.name,email:this.email,password:this.password})">Register</button><br>
+  <div class="row" style="margin-top: 5%">
+    <div class="col s4"></div>
+    <div class="col s4">
+      <h5 class="center">Register to our application</h5><br>
+      <label for="name">Nom :<input id="name" type="text" v-model="name"></label><br>
+      <label for="email">Email :<input type="text" id="email" v-model="email"></label><br>
+      <label for="password">Mot de passe :<input type="password" v-model="password" id="password"></label><br>
+      <div class="row">
+        <div class="col s6">
+          <button v-on:click="registerFeedback({name:this.name,email:this.email,password:this.password})"
+                  class="waves-effect waves-light btn">
+            Register</button><br>
+        </div>
+        <div>
+          <router-link to="/login"><button class="waves-effect waves-light btn">already register ?</button></router-link>
+        </div>
+      </div>
+    </div>
+    <div class="col s4"></div>
   </div>
 </template>
 <script>

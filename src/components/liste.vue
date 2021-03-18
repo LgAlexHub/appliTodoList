@@ -12,15 +12,15 @@
     <br>
     <form @submit.prevent="new_Todo(todoText)">
       <input v-model="todoText" type="text"/>
-      <input type="submit" value="Add todo">
+      <input class="waves-effect waves-light btn-small" type="submit" value="Add todo">
     </form>
     <div class="list">
       <ul>
         <li v-for="(todo,index) in filtrer" v-bind:key="todo.id" class="item">
           <b>{{ todo.title }}</b>
-          <input type="checkbox" v-model="todo.completed">
-          <button @click="modif()">Modifier</button>
-          <button @click="supp_Todo(index)">Supprimer</button>
+          <input type="checkbox" v-model="todo.completed">&nbsp;
+          <button class="waves-effect waves-light btn-small" @click="modif()">Modifier</button>&nbsp;
+          <button class="waves-effect waves-light btn-small" @click="supp_Todo(index)">Supprimer</button>
         </li>
         <div v-if="getTodosRemains(getCurrentListe) == null | getTodosRemains(getCurrentListe) == 0 | getTodosRemains(getCurrentListe) == 1">
           <p><strong>{{getTodosRemains(getCurrentListe)}}</strong> tâche à faire</p>
