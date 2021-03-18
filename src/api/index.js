@@ -19,6 +19,7 @@ module.exports={
             return await axios(config)
         } catch (err) {
             console.error(err);
+            return  err.response.statut;
         }
     
     },
@@ -30,7 +31,7 @@ module.exports={
             console.log(`${email} Registerd`)
         } catch (err) {
             console.error(err);
-            return response.statut;
+            return err.response.statut;
         }
     },
     login:async function login(email, password) {
@@ -43,7 +44,7 @@ module.exports={
             
         } catch (err) {
             console.error(err);
-            return response.statut;
+            return err.response.statut;
         }
     
     },
@@ -53,7 +54,7 @@ module.exports={
             return response.data;
         } catch (err) {
             console.error(err);
-            return response.statut;
+            return  err.response.statut;
         }
     },
     getTodoList:async function getTodoList(authToken){
@@ -62,7 +63,7 @@ module.exports={
             return response.data;
         }catch(err){
             console.error(err);
-            return response.statut;
+            return err.response.statut;
         }
     },
     getTodoListIdByName:async function getTodoListIdByName(name){
@@ -76,7 +77,7 @@ module.exports={
             return null;
         } catch (err) {
             console.error(err);
-            return response.statut;
+            return  err.response.statut;
         }
     },
     getTodos:async function getTodos(indexToDoList, authToken){
@@ -85,7 +86,7 @@ module.exports={
             return response.data;
         }catch(err){
             console.error(err);
-            return response.statut;
+            return  err.response.statut;
         }
     },
     createTodoList:async function createTodoList(name,authToken){
@@ -94,7 +95,7 @@ module.exports={
             return response.data;
         }catch(err){
             console.error(err);
-            return response.statut;
+            return  err.response.statut;
         }
     },
     createTodo:async function createTodo(name, completed, todolist_id,authToken){
@@ -103,7 +104,7 @@ module.exports={
             return response;
         }catch(err){
             console.error(err);
-            return response.statut;
+            return err.response.statut;
         }
     },
     completeTodo:async function completeTodo(idTodo, completed, todolist_id,authToken){
@@ -112,7 +113,7 @@ module.exports={
             return response.data;
         }catch(err){
             console.error(err);
-            return response.statut;
+            return  err.response.statut;
         }
     },
     deleteTodoList:async function deleteTodoList(id,authToken){
@@ -121,7 +122,7 @@ module.exports={
             return response;
         }catch(err){
             console.error(err);
-            return response.statut;
+            return  err.response.statut;
         }
     },
     deleteTodo:async function deleteTodo(idTodo, authToken){
@@ -130,7 +131,7 @@ module.exports={
             return response;
         }catch(err){
             console.error(err);
-            return response.statut;
+            return  err.response.statut;
         }
     }
 }
