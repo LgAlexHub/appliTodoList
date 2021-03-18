@@ -5,7 +5,7 @@
     <div>
       <label for="email">Email : <input type="text" id="email" v-model="email"></label><br>
       <label for="password">Mot de passe : <input type="password" id="password" v-model="password"></label><br>
-      <button @click="loginFeedback({email: this.email,password: this.password})">Connection</button>
+      <button @click="loginFeedback({email: this.email,password: this.password})">Connexion</button>
     </div>
     <div>
 
