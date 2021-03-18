@@ -41,11 +41,7 @@ module.exports={
             return  response;
 
         } catch (err) {
-<<<<<<< HEAD
             //console.error(err);
-=======
-            console.error(err);
->>>>>>> fc214f2a831308c40a5f7fc47a25f11650693c08
             return err.response;
         }
     
