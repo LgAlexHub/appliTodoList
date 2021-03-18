@@ -8,7 +8,7 @@
       </div>
     </nav>
     <div class="row">
-      <div class="col s2">
+      <div class="col s2" style="height: 100%">
         <sidebar/>
       </div>
       <div class="col s1"></div>
