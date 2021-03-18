@@ -22,11 +22,11 @@
           <button class="waves-effect waves-light btn-small" @click="modif()">Modifier</button>&nbsp;
           <button class="waves-effect waves-light btn-small" @click="supp_Todo(index)">Supprimer</button>
         </li>
-        <div v-if="getTodosRemains(getCurrentListe) == null | getTodosRemains(getCurrentListe) == 0 | getTodosRemains(getCurrentListe) == 1">
-          <p><strong>{{getTodosRemains(getCurrentListe)}}</strong> tâche à faire</p>
+        <div v-if="nbTache == null | nbTache == 0 | nbTache == 1">
+          <p><strong>{{nbTache}}</strong> tâche à faire</p>
         </div>
         <div v-else>
-          <p><strong>{{getTodosRemains(getCurrentListe)}}</strong> tâches à faire</p>
+          <p><strong>{{nbTache}}</strong> tâches à faire</p>
         </div>
       </ul>
     </div>
@@ -47,10 +47,16 @@ export default {
       ...mapActions("todolist", ['new_Todo', 'supp_Todo']),
   },
   computed: {
-    ...mapGetters("todolist", ["getListe", "filtrer","getTodosRemains","getCurrentListe"]),
+    ...mapGetters("todolist", ["getListe", "filtrer"]),
 
     liste() {
       return this.getListe;
+    },
+
+    nbTache() {
+      if (this.getListe.todos != null)
+        return this.getListe.todos.filter(todo => !todo.completed).length
+      else return 0;
     },
 
     filtrer() {

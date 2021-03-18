@@ -11,7 +11,7 @@
           <div class="row">
             <div class="col s6">
               <button  class="waves-effect waves-light btn-small"
-                       @click="loginFeedback({email: this.email,password: this.password})">Connection</button>
+                       @click="loginFeedback({email: this.email,password: this.password})">Sign up</button>
             </div>
             <div class="col s6">
                 <router-link to="/register">

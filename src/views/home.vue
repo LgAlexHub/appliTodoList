@@ -45,7 +45,7 @@ export default {
 <style>
 .sidebar {
   height: 100%;
-  width: 11vw;
+  width: 13vw;
   padding: 2vw;
   position: fixed;
   z-index: 1;
@@ -57,7 +57,7 @@ export default {
 }
 
 .liste {
-  margin-left: 15vw;
+  margin-left: 17vw;
   padding: 0px 10px;
 }
 
