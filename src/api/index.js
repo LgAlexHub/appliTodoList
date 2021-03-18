@@ -31,11 +31,7 @@ module.exports={
             console.log(`${email} Registerd`)
         } catch (err) {
             console.error(err);
-<<<<<<< HEAD
             return err.response.statut;
-=======
-            return null;
->>>>>>> 2418c16f84f1145378868259ec8370f579ab6cac
         }
     },
     login:async function login(email, password) {
