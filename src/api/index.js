@@ -43,8 +43,8 @@ module.exports={
             return  response.data.token;
 
         } catch (err) {
-            console.error(err);
-            return err.response.statut;
+            //console.error(err);
+            return err.response;
         }
     
     },
