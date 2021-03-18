@@ -3,12 +3,14 @@ export function load(state, data) {
     state.properties = data
 }
 
-export function newListe() {
-    //TODO ajouter une nouvelle liste vide
+export function newListe(state,list) {
+    if(list!=="")
+        state.todolists.push({id: state.nb_id++, title:list} );
 }
 
 export function newTodo(state, todo){
-    state.todolists.push({id: state.nb_id++, title:todo} );
+    if(todo!=="")
+        console.log(state);
 }
 
 export function suppTodo(state, id){

@@ -28,7 +28,7 @@ export default {
         ...mapGetters("todolist", ["getAllListes"]),
     },
     methods: {
-      ...mapActions("todolist", ['newListe', 'setCurrentList']),
+        ...mapActions("todolist", ['newListe', 'setCurrentList']),
     },
 }
 </script>

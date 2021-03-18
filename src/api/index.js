@@ -4,7 +4,7 @@ const axios = require('axios');
 module.exports={
     getAxiosClient :async function getAxiosClient(path, method, Token) {
         let baseUrl = 'http://138.68.74.39/api/'
-        let config = Token!= null ? 
+        let config = Token!= null ?
         {
             method: method,
             url: baseUrl + path,
@@ -31,7 +31,11 @@ module.exports={
             console.log(`${email} Registerd`)
         } catch (err) {
             console.error(err);
+<<<<<<< HEAD
             return err.response.statut;
+=======
+            return null;
+>>>>>>> 2418c16f84f1145378868259ec8370f579ab6cac
         }
     },
     login:async function login(email, password) {
@@ -41,7 +45,7 @@ module.exports={
             let response = await this.getAxiosClient(`login?email=${email}&password=${password}`,'post');
             console.log(`${email} Logged`);
             return  response.data.token;
-            
+
         } catch (err) {
             console.error(err);
             return err.response.statut;
