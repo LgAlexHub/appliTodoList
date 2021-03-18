@@ -16,11 +16,11 @@
     </form>
     <div class="list">
       <ul>
-        <li v-for="(todo,index) in filtrer" v-bind:key="todo.id" class="item">
-          <b>{{ todo.title }}</b>
-          <input type="checkbox" v-model="todo.completed">&nbsp;
-          <button class="waves-effect waves-light btn-small" @click="modif()">Modifier</button>&nbsp;
-          <button class="waves-effect waves-light btn-small" @click="supp_Todo(index)">Supprimer</button>
+        <li v-for="(todo, index) in filtrer" v-bind:key="todo.id" class="item">
+          <b>{{ todo.name }}</b>
+          <input type="checkbox" v-model="todo.completed">
+          <button class="waves-effect waves-light btn-small" @click="modif()">Modifier</button>
+          <button class="waves-effect waves-light btn-small" @click="supp_Todo_API({todo: todo, index:index, auth_token:this.getToken})">Supprimer</button>
         </li>
         <div v-if="nbTache == null | nbTache == 0 | nbTache == 1">
           <p><strong>{{nbTache}}</strong> tâche à faire</p>
@@ -44,10 +44,11 @@ export default {
     }
   },
   methods:{
-      ...mapActions("todolist", ['new_Todo', 'supp_Todo']),
+      ...mapActions("todolist", ['new_Todo', 'supp_Todo','supp_Todo_API']),
   },
   computed: {
     ...mapGetters("todolist", ["getListe", "filtrer"]),
+    ...mapGetters("account", ["isLoged","getToken"]),
 
     liste() {
       return this.getListe;

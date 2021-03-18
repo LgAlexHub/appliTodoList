@@ -8,7 +8,7 @@
         <div class="list">
             <ul>
                 <li v-for="liste in getAllListes" v-bind:key="liste.id" class="item">
-                    <button class="waves-effect waves-light btn"  @click="setCurrentList(liste.id)">{{ liste.title }} ({{ getTodosRemains(liste) }})</button>
+                    <button class="waves-effect waves-light btn" @click="setCurrentList(liste.id)">{{ liste.name }} ({{ getTodosRemains(liste) }})</button>
                 </li>
             </ul>
         </div>
@@ -26,16 +26,23 @@ export default {
     },
     computed: {
         ...mapGetters("todolist", ["getAllListes"]),
+        ...mapGetters("account", ["isLoged","getToken"])
     },
     methods: {
-        ...mapActions("todolist", ['newListe', 'setCurrentList']),
+        ...mapActions("todolist", ['newListe', 'setCurrentList','getListe_API']),
 
         getTodosRemains(liste) {
             if (liste.todos != null)
                 return liste.todos.filter(todo => !todo.completed).length
             else return 0;
-        }
+        },
     },
+
+    mounted(){
+        if(this.isLoged){
+            this.getListe_API({auth_token: this.getToken})
+        }
+    }
 }
 </script>
 
