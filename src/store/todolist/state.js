@@ -1,7 +1,7 @@
 export default function () {
     return {
         current_list:null,
-        nb_id:3,
+        nb_id:2,
         filter:"all",
         todolists: [
             {
@@ -21,7 +21,7 @@ export default function () {
                 ]
             },
             {
-                'id': 2,
+                'id': 1,
                 'title': 'liste_2',
                 'todos': [
                     {

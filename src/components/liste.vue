@@ -9,18 +9,25 @@
         <option value="not_completed">Non terminé</option>    
       </select>
     </div>
-    <form>
+    <br>
+    <form @submit.prevent="new_Todo(todoText)">
       <input v-model="todoText" type="text"/>
-      <button @click="new_Todo(todoText)">Add todo</button><br>
+      <input type="submit" value="Add todo">
     </form>
     <div class="list">
       <ul>
-        <li v-for="todo in filtrer" v-bind:key="todo.id" class="item">
-          {{ todo.title }}
+        <li v-for="(todo,index) in filtrer" v-bind:key="todo.id" class="item">
+          <b>{{ todo.title }}</b>
           <input type="checkbox" v-model="todo.completed">
           <button @click="modif()">Modifier</button>
-          <button @click="supp_Todo(todo.id)">Supprimer</button>
+          <button @click="supp_Todo(index)">Supprimer</button>
         </li>
+        <div v-if="getTodosRemains(getCurrentListe) == null | getTodosRemains(getCurrentListe) == 0 | getTodosRemains(getCurrentListe) == 1">
+          <p><strong>{{getTodosRemains(getCurrentListe)}}</strong> tâche à faire</p>
+        </div>
+        <div v-else>
+          <p><strong>{{getTodosRemains(getCurrentListe)}}</strong> tâches à faire</p>
+        </div>
       </ul>
     </div>
   </div>
@@ -40,7 +47,7 @@ export default {
       ...mapActions("todolist", ['new_Todo', 'supp_Todo']),
   },
   computed: {
-    ...mapGetters("todolist", ["getListe", "filtrer"]),
+    ...mapGetters("todolist", ["getListe", "filtrer","getTodosRemains","getCurrentListe"]),
 
     liste() {
       return this.getListe;
