@@ -8,7 +8,7 @@
         <div class="list">
             <ul>
                 <li v-for="liste in getAllListes" v-bind:key="liste.id" class="item">
-                    <button @click="setCurrentList(liste.id)">{{ liste.title }}</button>
+                    <button @click="setCurrentList(liste.id)">{{ liste.title }} ({{ getTodosRemains(liste) }})</button>
                 </li>
             </ul>
         </div>
@@ -29,6 +29,12 @@ export default {
     },
     methods: {
         ...mapActions("todolist", ['newListe', 'setCurrentList']),
+
+        getTodosRemains(liste) {
+            if (liste.todos != null)
+                return liste.todos.filter(todo => !todo.completed).length
+            else return 0;
+        }
     },
 }
 </script>
