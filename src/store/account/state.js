@@ -1,5 +1,6 @@
 export default function () {
     return {
-        properties: null
+        properties: null,
+        token: null
     }
 }   

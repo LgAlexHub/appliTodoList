@@ -27,11 +27,10 @@ module.exports={
         try {
             if (!name || !email || !password) return null;
             let response = await this.getAxiosClient(`register?name=${name}&email=${email}&password=${password}`, 'post');
-            this.authToken = response.data.token;
-            console.log(`${email} Registerd`)
+            return response;
         } catch (err) {
             console.error(err);
-            return err.response.statut;
+            return err;
         }
     },
     login:async function login(email, password) {
@@ -39,12 +38,11 @@ module.exports={
         if (!email || !password) return null;
         try {
             let response = await this.getAxiosClient(`login?email=${email}&password=${password}`,'post');
-            console.log(`${email} Logged`);
-            return  response.data.token;
+            return  response;
 
         } catch (err) {
             console.error(err);
-            return err.response.statut;
+            return err.response;
         }
     
     },
