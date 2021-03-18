@@ -2,14 +2,13 @@ const axios = require('axios');
 
 
 module.exports={
-    authToken : null,
-    getAxiosClient :async function getAxiosClient(path, method) {
+    getAxiosClient :async function getAxiosClient(path, method, Token) {
         let baseUrl = 'http://138.68.74.39/api/'
-        let config = this.authToken!= null ? 
+        let config = Token!= null ? 
         {
             method: method,
             url: baseUrl + path,
-            headers: {"Authorization" : `Bearer ${this.authToken}`}
+            headers: {"Authorization" : `Bearer ${Token}`}
         }
         :
         {
@@ -31,7 +30,7 @@ module.exports={
             console.log(`${email} Registerd`)
         } catch (err) {
             console.error(err);
-            return null;
+            return response.statut;
         }
     },
     login:async function login(email, password) {
@@ -39,28 +38,31 @@ module.exports={
         if (!email || !password) return null;
         try {
             let response = await this.getAxiosClient(`login?email=${email}&password=${password}`,'post');
-            this.authToken = response.data.token;
-            console.log(`${email} Logged`)
+            console.log(`${email} Logged`);
+            return  response.data.token;
+            
         } catch (err) {
             console.error(err);
-            return null;
+            return response.statut;
         }
     
     },
-    getUser:async function getUser() {
+    getUser:async function getUser(authToken) {
         try {
-            const response = await this.getAxiosClient('user','get');
+            const response = await this.getAxiosClient('user','get',authToken);
             return response.data;
         } catch (err) {
             console.error(err);
+            return response.statut;
         }
     },
-    getTodoList:async function getTodoList(){
+    getTodoList:async function getTodoList(authToken){
         try{
-            const response = await this.getAxiosClient('todolists','get')
+            const response = await this.getAxiosClient('todolists','get',authToken)
             return response.data;
         }catch(err){
-            console.error(err)
+            console.error(err);
+            return response.statut;
         }
     },
     getTodoListIdByName:async function getTodoListIdByName(name){
@@ -73,47 +75,65 @@ module.exports={
             }
             return null;
         } catch (err) {
-            console.error(err)
+            console.error(err);
+            return response.statut;
         }
     },
-    getTodos:async function getTodos(indexToDoList){
+    getTodos:async function getTodos(indexToDoList, authToken){
         try{
-            const response = await this.getAxiosClient(`todos/${indexToDoList}`,'get');
+            const response = await this.getAxiosClient(`todos/${indexToDoList}`,'get',authToken);
             return response.data;
         }catch(err){
             console.error(err);
+            return response.statut;
         }
     },
-    createTodoList:async function createTodoList(name){
+    createTodoList:async function createTodoList(name,authToken){
         try{
-            const response = await this.getAxiosClient(`todolist?name=${name}`,'post');
+            const response = await this.getAxiosClient(`todolist?name=${name}`,'post',authToken);
             return response.data;
         }catch(err){
             console.error(err);
+            return response.statut;
         }
     },
-    createTodo:async function createTodo(name, completed, todolist_id){
+    createTodo:async function createTodo(name, completed, todolist_id,authToken){
         try{
-            await this.getAxiosClient(`todo?name=${name}&completed=${completed}&todolist_id=${todolist_id}`,'post');
+            let response = await this.getAxiosClient(`todo?name=${name}&completed=${completed}&todolist_id=${todolist_id}`,'post',authToken);
+            return response;
         }catch(err){
             console.error(err);
+            return response.statut;
         }
     },
-    completeTodo:async function completeTodo(idTodo, completed, todolist_id){
+    completeTodo:async function completeTodo(idTodo, completed, todolist_id,authToken){
         try{
-            const response = await this.getAxiosClient(`completeTodo/${idTodo}?name=&completed=${completed}&todolist_id=${todolist_id} `,'post');
+            const response = await this.getAxiosClient(`completeTodo/${idTodo}?name=&completed=${completed}&todolist_id=${todolist_id} `,'post',authToken);
             return response.data;
         }catch(err){
             console.error(err);
+            return response.statut;
+        }
+    },
+    deleteTodoList:async function deleteTodoList(id,authToken){
+        try{
+            const response = await this.getAxiosClient(`todolist/${id}`,'DELETE',authToken);
+            return response;
+        }catch(err){
+            console.error(err);
+            return response.statut;
+        }
+    },
+    deleteTodo:async function deleteTodo(idTodo, authToken){
+        try{
+            const response = await this.getAxiosClient(`todo/${idTodo}`,'DELETE',authToken);
+            return response;
+        }catch(err){
+            console.error(err);
+            return response.statut;
         }
     }
 }
 
 //-----MAIN POUR FAIRE DES TESTES-------
-/*
-(async function () {
-    await login('21801364@etu.unicaen.fr','thomasLePluBo')
-    let response = await getTodo(65);
-    console.log(response)
-}());
-*/
+
