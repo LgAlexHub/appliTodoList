@@ -2,7 +2,7 @@
     <div>
         <div>
             <input v-model="listeText" type="text"/>
-            <button @click="newListe(listeText)">Add todo</button><br>
+            <button class="waves-effect waves-light btn" @click="newListe(listeText)">Add todo list</button><br>
         </div>
         
         <div class="list">
