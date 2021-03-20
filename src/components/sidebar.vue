@@ -29,7 +29,7 @@ export default {
         ...mapGetters("account", ["isLoged","getToken"])
     },
     methods: {
-        ...mapActions("todolist", ['newListe', 'setCurrentList','getListe_API']),
+        ...mapActions("todolist", ['newListe', 'setCurrentList','getListe_API', "newListe_API"]),
 
         getTodosRemains(liste) {
             if (liste.todos != null)

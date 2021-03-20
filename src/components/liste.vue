@@ -1,6 +1,6 @@
 <template>
   <div v-if="liste!=null">
-    <h1>{{ liste.title }}</h1>
+    <h1>{{ liste.name }}</h1>
     <div>
       <label for="filtre">Filtre : </label>
       <select name="filtre" id="filtre" v-model="filter">
@@ -10,17 +10,23 @@
       </select>
     </div>
     <br>
-    <form @submit.prevent="new_Todo(todoText)">
+    <form @submit.prevent="new_Todo({name:todoText, completed:false, todolist_id:current_list})">
       <input v-model="todoText" type="text"/>
       <input class="waves-effect waves-light btn-small" type="submit" value="Add todo">
     </form>
     <div class="list">
       <ul>
         <li v-for="(todo, index) in filtrer" v-bind:key="todo.id" class="item">
-          <b>{{ todo.name }}</b>
-          <input type="checkbox" v-model="todo.completed">
-          <button class="waves-effect waves-light btn-small" @click="modif()">Modifier</button>
-          <button class="waves-effect waves-light btn-small" @click="supp_Todo_API({todo: todo, index:index, auth_token:this.getToken})">Supprimer</button>
+          <input type="checkbox" class="filled-in" v-model="todo.completed">&nbsp;
+          <div v-if="editing">
+            {{ todo.name }}
+            <button class="waves-effect waves-light btn-small" @click="modifyTodo({id:todo.id, name:todo.name, completed:todo.completed, todolist_id:current_list})">Modifier</button>
+          </div>
+          <div v-else>
+            <input type="text" v-model="todo.name">
+            <button class="waves-effect waves-light btn-small" @click="modifyTodo({id:todo.id, name:todo.name, completed:todo.completed, todolist_id:current_list})">Enregistrer</button>
+          </div>
+          <button class="waves-effect waves-light btn-small" @click="supp_Todo({todo: todo, index:index, auth_token:this.getToken})">Supprimer</button>
         </li>
         <div v-if="nbTache == null | nbTache == 0 | nbTache == 1">
           <p><strong>{{nbTache}}</strong> tâche à faire</p>
@@ -41,17 +47,28 @@ export default {
     return {
       todoText: "",
       filter: 'all',
+      editing: 'false'
     }
   },
   methods:{
-      ...mapActions("todolist", ['new_Todo', 'supp_Todo','supp_Todo_API']),
+      ...mapActions("todolist", ['new_Todo', 'supp_Todo', 'modify_todo']),
+
+    modifyTodo(todo) {
+      console.log("Modify todo : "+todo.id)
+      this.editing = this.editing == true ? false : true;
+      this.modify_todo(todo);
+    },
   },
   computed: {
-    ...mapGetters("todolist", ["getListe", "filtrer"]),
+    ...mapGetters("todolist", ["getListe", "filtrer","getCurrentTodoList"]),
     ...mapGetters("account", ["isLoged","getToken"]),
 
     liste() {
       return this.getListe;
+    },
+
+    current_list(){
+      return this.getCurrentTodoList;
     },
 
     nbTache() {

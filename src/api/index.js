@@ -131,7 +131,16 @@ module.exports={
             console.error(err);
             return  err.response.statut;
         }
-    }
+    },
+    modifyTodo:async function modifyTodo(idTodo, name, completed,todolist_id, authToken){
+        try{
+            const response = await this.getAxiosClient(`todo/${idTodo}?name=${name}&completed=${completed}&todolist_id=${todolist_id}`,'patch',authToken);
+            return response.data;
+        }catch(err){
+            console.error(err);
+            return  err.response.statut;
+        }
+    },
 }
 
 //-----MAIN POUR FAIRE DES TESTES-------
