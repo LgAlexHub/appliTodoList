@@ -63,3 +63,18 @@ export function supp_Todo({ commit }, data) {
         console.error(error)
     })
 }
+
+export const updateCompleteTodo = ({ commit }, data) => {
+    console.log(data.completed)
+    if(data.completed==0 || data.completed==false){
+        data.completed=1
+    }else if(data.completed==1 || data.completed==true){
+        data.completed=0
+    }
+    return api.completeTodo(data.id, data.name, data.completed,data.todolist_id, data.auth_token).then(res => {
+        commit("updateCompleteTodo", data);
+        console.log(res)
+    }).catch(error => {
+        console.error(error)
+    });
+}

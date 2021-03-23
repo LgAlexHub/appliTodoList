@@ -15,7 +15,7 @@
       <label for="filtre">Filtre : </label>
     </div>
     <br>
-    <form @submit.prevent="new_Todo({name:todoText, completed:0, todolist_id:current_list, auth_token: this.getToken})">
+    <form @submit.prevent="new_Todo({name:todoText, completed: 0, todolist_id:current_list, auth_token: this.getToken})">
       <input placeholder="Todo1" v-model="todoText" type="text"/>
       <input class="waves-effect waves-light btn-small" type="submit" value="Ajouter une Tâche">
     </form>
@@ -26,13 +26,13 @@
             <div v-if="editing">
               <div v-if=todo.completed>
                 <label>
-                    <input type="checkbox" id="check" v-model="todo.completed">
+                    <input type="checkbox" id="check" v-model="todo.completed" @click="updateCompleteTodo({id:todo.id, name: todo.name, completed: todo.completed, todolist_id:current_list, auth_token: this.getToken})">
                     <span style="text-decoration:line-through;">{{ todo.name }}</span>
                 </label>
               </div>
               <div v-else>
                 <label>
-                    <input type="checkbox" id="check" v-model="todo.completed">
+                    <input type="checkbox" id="check" v-model="todo.completed" @click="updateCompleteTodo({id:todo.id, name: todo.name, completed: todo.completed, todolist_id:current_list, auth_token: this.getToken})">
                     <span>{{ todo.name }}</span>
                 </label>
               </div>
@@ -70,7 +70,7 @@ export default {
     }
   },
   methods:{
-      ...mapActions("todolist", ['new_Todo', 'supp_Todo', 'modify_todo','suppTodoList']),
+      ...mapActions("todolist", ['new_Todo', 'supp_Todo', 'modify_todo','suppTodoList','updateCompleteTodo']),
 
     modifyTodo(todo) {
       console.log("Modify todo : "+todo.id)

@@ -105,9 +105,10 @@ module.exports={
             return err.response.statut;
         }
     },
-    completeTodo:async function completeTodo(idTodo, completed, todolist_id,authToken){
+    completeTodo:async function completeTodo(idTodo, name, completed, todolist_id,authToken){
         try{
-            const response = await this.getAxiosClient(`completeTodo/${idTodo}?name=&completed=${completed}&todolist_id=${todolist_id} `,'post',authToken);
+            const response = await this.getAxiosClient(`completeTodo/${idTodo}?name=${name}&completed=${completed}&todolist_id=${todolist_id} `,'post',authToken);
+            console.log(response)
             return response.data;
         }catch(err){
             console.error(err);

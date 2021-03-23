@@ -69,3 +69,10 @@ export function setCurrentList(state, id) {
 export function setTodoLists(state,data){
     state.todolists=data
 }
+
+export function updateCompleteTodo(state, data){
+    const todolist = state.todolists.find(todolist => todolist.id === state.current_list);
+    const todo = todolist.todos.find(todo => todo.id === data.id);
+    console.log(data.completed)
+    todo.completed = data.completed;
+}
