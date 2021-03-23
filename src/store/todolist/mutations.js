@@ -12,8 +12,8 @@ export function newListe(state,list) {
 export function newListe_API(state,list) {
     console.log(list)
     if(list!==""){
-        state.todolists.push(list);
         list.todos = [];
+        state.todolists.push(list);
     }        
     console.log(state.todolists)
 }
@@ -54,6 +54,13 @@ export function suppTodoList(state, data){
     }
 }
 
+export function modifyTodo(state, data){
+    const todolist = state.todolists.find(todolist => todolist.id === state.current_list);
+    const todo = todolist.todos.find(todo => todo.id === data.id);
+    todo.name = data.name;
+    todo.completed = data.completed;
+}
+
 export function setCurrentList(state, id) {
     state.current_list = id;
     console.log("Current list : "+state.current_list)
@@ -61,11 +68,4 @@ export function setCurrentList(state, id) {
 
 export function setTodoLists(state,data){
     state.todolists=data
-}
-
-export function modifyTodo(state, data){
-    const todolist = state.todolists.find(todolist => todolist.id === state.current_list);
-    const todo = todolist.todos.find(todo => todo.id === data.id);
-    todo.name = data.name;
-    todo.completed = data.completed;
 }
