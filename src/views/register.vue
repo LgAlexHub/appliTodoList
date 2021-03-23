@@ -1,7 +1,7 @@
 <template>
   <nav class="teal lighten-3" style="padding-left: 2%">
     <div class="nav-wrapper">
-      <a><router-link to="/home"><i class="material-icons">arrow_back</i></router-link></a>
+      <a><router-link to="/"><i class="material-icons">arrow_back</i></router-link></a>
     </div>
   </nav>
   <div v-if="this.message!==''">
