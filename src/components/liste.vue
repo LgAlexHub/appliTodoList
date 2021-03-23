@@ -37,14 +37,14 @@
                 </label>
               </div>
               <br>
-              <button class="waves-effect waves-light btn-small" @click="modifyTodo({id:todo.id, name:todo.name, completed:todo.completed, todolist_id:current_list, auth_token: this.getToken})">Modifier</button>
+              <button class="waves-effect waves-light btn-small" @click="modifyTodo({id:todo.id, name:todo.name, completed:todo.completed, todolist_id:current_list, auth_token: this.getToken})">Modifier</button>&nbsp;
+              <button class="waves-effect waves-light red btn-small" @click="supp_Todo({todo: todo, index:index, auth_token:this.getToken})">Supprimer</button>
             </div>
             <div v-else>
               <input type="text" v-model="todo.name"><br>
-              <button class="waves-effect waves-light btn-small" @click="modifyTodo({id:todo.id, name:todo.name, completed:todo.completed, todolist_id:current_list, auth_token: this.getToken})">Enregistrer</button>
+              <button class="waves-effect waves-light btn-small" @click="modifyTodo({id:todo.id, name:todo.name, completed:todo.completed, todolist_id:current_list, auth_token: this.getToken})">Enregistrer</button>&nbsp;
+              <button class="waves-effect waves-light red btn-small" @click="supp_Todo({todo: todo, index:index, auth_token:this.getToken})">Supprimer</button>
             </div>
-            <br>
-            <button class="waves-effect waves-light red btn-small" @click="supp_Todo({todo: todo, index:index, auth_token:this.getToken})">Supprimer</button>
           </div>
         </li>
         <div v-if="nbTache == null | nbTache == 0 | nbTache == 1">

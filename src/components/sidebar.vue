@@ -2,13 +2,13 @@
     <div>
         <div>
             <input v-model="listeText" type="text"/>
-            <button class="waves-effect waves-light btn" @click="newListe({name: listeText, auth_token:this.getToken})">Ajouter une todo list</button><br>
+            <button class="waves-effect waves-light btn-small" @click="newListe({name: listeText, auth_token:this.getToken})">Ajouter une todo list</button><br>
         </div>
         
         <div class="list">
             <ul>
                 <li v-for="liste in getAllListes" v-bind:key="liste.id" class="item">
-                    <button class="waves-effect waves-light btn" @click="setCurrentList(liste.id)">{{ liste.name }} ({{ getTodosRemains(liste) }})</button>
+                    <button class="waves-effect waves-light btn-small" @click="setCurrentList(liste.id)">{{ liste.name }} ({{ getTodosRemains(liste) }})</button>
                 </li>
             </ul>
         </div>

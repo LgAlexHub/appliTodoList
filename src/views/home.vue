@@ -3,17 +3,17 @@
       <div class="nav-wrapper ">
         <b>TodoList App</b>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li v-if="isLoged"><a class="waves-effect waves-light btn" v-on:click="logout()">Logout</a></li>
+          <li v-if="isLoged"><a v-on:click="logout()">Logout</a></li>
           <li v-else><router-link to="/login">Login</router-link></li>
         </ul>
       </div>
     </nav>
     <div class="row">
-      <div class="col s2 " style="height: 100%">
+      <div class="col s2" style="height: 100%">
         <sidebar/>
       </div>
       <div class="col s1"></div>
-        <div class="col s6">
+        <div class="col s10">
           <liste/>
         </div>
     </div>

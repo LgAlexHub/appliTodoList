@@ -29,7 +29,7 @@ export function register({commit}, data)
             if (res !== null && res !== undefined) {
                 if (res.status === 200) {
                     commit("setAuthToken", res.data.token)
-                    router.push("/home")
+                    router.push("/")
                 }
             } else {
                 return "L'un des champs est vide ou érroné"
