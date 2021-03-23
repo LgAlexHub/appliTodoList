@@ -21,10 +21,19 @@
     <div class="list">
       <ul>
         <li v-for="(todo, index) in filtrer" v-bind:key="todo.id" class="item">
-          <input type="checkbox" class="filled-in" v-model="todo.completed">&nbsp;
+          <label>
+            <input type="checkbox" id="check" v-model="todo.completed">
+            <span>{{ todo.name }}</span>
+          </label>
           <div>
             <div v-if="editing">
-              {{ todo.name }}
+              <div v-if=todo.completed>
+              <p style="text-decoration:line-through;">{{ todo.name }}</p>
+              </div>
+              <div v-else>
+                {{ todo.name }}
+              </div>
+          
               <br>
               <button class="waves-effect waves-light btn-small" @click="modifyTodo({id:todo.id, name:todo.name, completed:todo.completed, todolist_id:current_list, auth_token: this.getToken})">Modifier</button>
             </div>
