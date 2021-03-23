@@ -5,35 +5,37 @@
   <div v-if="liste!=null">
     <h1>{{ liste.name }}</h1>
     <button class="waves-effect waves-light red btn-small" @click="suppTodoList({id:current_list, auth_token: this.getToken})">Supprimer</button>
-    <div>
-      <label for="filtre">Filtre : </label>
+    <div class="input-field col s12">
+      
       <select name="filtre" id="filtre" v-model="filter">
         <option value="all">Tout</option>
         <option value="completed">Terminé</option>
         <option value="not_completed">Non terminé</option>    
       </select>
+      <label for="filtre">Filtre : </label>
     </div>
     <br>
     <form @submit.prevent="new_Todo({name:todoText, completed:0, todolist_id:current_list, auth_token: this.getToken})">
-      <input v-model="todoText" type="text"/>
+      <input placeholder="Todo1" v-model="todoText" type="text"/>
       <input class="waves-effect waves-light btn-small" type="submit" value="Ajouter une Tâche">
     </form>
     <div class="list">
       <ul>
         <li v-for="(todo, index) in filtrer" v-bind:key="todo.id" class="item">
-          <label>
-            <input type="checkbox" id="check" v-model="todo.completed">
-            <span>{{ todo.name }}</span>
-          </label>
           <div>
             <div v-if="editing">
               <div v-if=todo.completed>
-              <p style="text-decoration:line-through;">{{ todo.name }}</p>
+                <label>
+                    <input type="checkbox" id="check" v-model="todo.completed">
+                    <span style="text-decoration:line-through;">{{ todo.name }}</span>
+                </label>
               </div>
               <div v-else>
-                {{ todo.name }}
+                <label>
+                    <input type="checkbox" id="check" v-model="todo.completed">
+                    <span>{{ todo.name }}</span>
+                </label>
               </div>
-          
               <br>
               <button class="waves-effect waves-light btn-small" @click="modifyTodo({id:todo.id, name:todo.name, completed:todo.completed, todolist_id:current_list, auth_token: this.getToken})">Modifier</button>
             </div>
