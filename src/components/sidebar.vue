@@ -2,7 +2,7 @@
     <div>
         <div>
             <input v-model="listeText" type="text"/>
-            <button class="waves-effect waves-light btn" @click="newListe(listeText)">Add todo list</button><br>
+            <button class="waves-effect waves-light btn" @click="newListe({name: listeText, auth_token:this.getToken})">Ajouter une todo list</button><br>
         </div>
         
         <div class="list">
@@ -29,7 +29,7 @@ export default {
         ...mapGetters("account", ["isLoged","getToken"])
     },
     methods: {
-        ...mapActions("todolist", ['newListe', 'setCurrentList','getListe_API', "newListe_API"]),
+        ...mapActions("todolist", ['newListe', 'setCurrentList','getListe_API']),
 
         getTodosRemains(liste) {
             if (liste.todos != null)

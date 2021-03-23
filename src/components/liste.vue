@@ -1,6 +1,10 @@
 <template>
+  <div v-if="current_list==null">
+    <h4>Veuillez sélectionner une TodoList à afficher</h4>
+  </div>
   <div v-if="liste!=null">
     <h1>{{ liste.name }}</h1>
+    <button class="waves-effect waves-light red btn-small" @click="suppTodoList({id:current_list, auth_token: this.getToken})">Supprimer</button>
     <div>
       <label for="filtre">Filtre : </label>
       <select name="filtre" id="filtre" v-model="filter">
@@ -10,23 +14,27 @@
       </select>
     </div>
     <br>
-    <form @submit.prevent="new_Todo({name:todoText, completed:false, todolist_id:current_list})">
+    <form @submit.prevent="new_Todo({name:todoText, completed:0, todolist_id:current_list, auth_token: this.getToken})">
       <input v-model="todoText" type="text"/>
-      <input class="waves-effect waves-light btn-small" type="submit" value="Add todo">
+      <input class="waves-effect waves-light btn-small" type="submit" value="Ajouter une Tâche">
     </form>
     <div class="list">
       <ul>
         <li v-for="(todo, index) in filtrer" v-bind:key="todo.id" class="item">
           <input type="checkbox" class="filled-in" v-model="todo.completed">&nbsp;
-          <div v-if="editing">
-            {{ todo.name }}
-            <button class="waves-effect waves-light btn-small" @click="modifyTodo({id:todo.id, name:todo.name, completed:todo.completed, todolist_id:current_list})">Modifier</button>
+          <div>
+            <div v-if="editing">
+              {{ todo.name }}
+              <br>
+              <button class="waves-effect waves-light btn-small" @click="modifyTodo({id:todo.id, name:todo.name, completed:todo.completed, todolist_id:current_list, auth_token: this.getToken})">Modifier</button>
+            </div>
+            <div v-else>
+              <input type="text" v-model="todo.name"><br>
+              <button class="waves-effect waves-light btn-small" @click="modifyTodo({id:todo.id, name:todo.name, completed:todo.completed, todolist_id:current_list, auth_token: this.getToken})">Enregistrer</button>
+            </div>
+            <br>
+            <button class="waves-effect waves-light red btn-small" @click="supp_Todo({todo: todo, index:index, auth_token:this.getToken})">Supprimer</button>
           </div>
-          <div v-else>
-            <input type="text" v-model="todo.name">
-            <button class="waves-effect waves-light btn-small" @click="modifyTodo({id:todo.id, name:todo.name, completed:todo.completed, todolist_id:current_list})">Enregistrer</button>
-          </div>
-          <button class="waves-effect waves-light btn-small" @click="supp_Todo({todo: todo, index:index, auth_token:this.getToken})">Supprimer</button>
         </li>
         <div v-if="nbTache == null | nbTache == 0 | nbTache == 1">
           <p><strong>{{nbTache}}</strong> tâche à faire</p>
@@ -51,7 +59,7 @@ export default {
     }
   },
   methods:{
-      ...mapActions("todolist", ['new_Todo', 'supp_Todo', 'modify_todo']),
+      ...mapActions("todolist", ['new_Todo', 'supp_Todo', 'modify_todo','suppTodoList']),
 
     modifyTodo(todo) {
       console.log("Modify todo : "+todo.id)

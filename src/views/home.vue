@@ -1,6 +1,7 @@
 <template>
     <nav style="margin-bottom: 10px; padding-right: 5px" class="teal lighten-3">
       <div class="nav-wrapper ">
+        <b>TodoList App</b>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li v-if="isLoged"><a class="waves-effect waves-light btn" v-on:click="logout()">Logout</a></li>
           <li v-else><router-link to="/login">Login</router-link></li>

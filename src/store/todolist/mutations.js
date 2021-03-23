@@ -10,10 +10,10 @@ export function newListe(state,list) {
 }
 
 export function newListe_API(state,list) {
+    console.log(list)
     if(list!==""){
-        for(let i=0; i<list.length;i++){
-            state.todolists.push({id: list.id, name:list.name, todos:list.todos} );
-        }
+        state.todolists.push(list);
+        list.todos = [];
     }        
     console.log(state.todolists)
 }
@@ -23,7 +23,7 @@ export function newTodo(state, todo){
         let id=state.current_list
         console.log("Id de la liste à modifier:"+id)
         let nb_todos=state.todolists[id].todos.length
-        state.todolists[id].todos.push({id: nb_todos=nb_todos+1, name:todo, completed:false} );
+        state.todolists[id].todos.push({id: nb_todos=nb_todos+1, name:todo.name, completed:false} );
     }
 }
 
@@ -31,9 +31,8 @@ export function newTodo_API(state, todo){
     if(todo!==""){
         console.log(todo)
         const todoList = state.todolists.find(todoList => todoList.id === state.current_list);
-        todoList.todos.push({name:todo.name, completed:false});
+        todoList.todos.push(todo);
         console.log(todoList)
-        //state.todolists[id].todos.push({id: nb_todos=nb_todos+1, name:todo, completed:false} );
     }
 }
 
@@ -44,6 +43,15 @@ export function suppTodo(state, data){
     const todolist = state.todolists.find(todolist => todolist.id === state.current_list);
     todolist.todos = todolist.todos.filter(todo => todo.id !== data.id);
    //state.todolists = state.todolists[state.current_list].filter(todo => todo.id != id);
+}
+
+export function suppTodoList(state, data){ 
+    console.log(data)
+    for(let i = 0; i < state.todolists.length; i++){
+        if(data == state.todolists[i].id){
+            state.todolists.splice(i, 1);
+        }
+    }
 }
 
 export function setCurrentList(state, id) {

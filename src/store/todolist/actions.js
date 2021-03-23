@@ -1,15 +1,36 @@
 import * as api from "../../api/index.js"
 
-export function newListe({ commit }, liste) {
-    commit("newListe", liste);
+export const getListe_API = ({ commit }, data) => {
+    return api.getTodoList(data.auth_token).then(res => {
+        commit("setTodoLists", res);
+    }).catch(error => {
+        return error.response.status
+    })
+};
+
+export function setCurrentList({ commit }, id) {
+    commit("setCurrentList", id);
 }
 
 export function new_Todo({ commit }, data) {
-    commit("newTodo_API", data);
+    console.log(data)
     return api.createTodo(data.name, data.completed, data.todolist_id, data.auth_token).then(res => {
         console.log(res)
+        commit("newTodo_API", res.data);
     }).catch(error => {
+        commit("newTodo", data);
         console.error(error)
+    })
+}
+
+export const newListe = ({ commit }, data) =>  {
+    return api.createTodoList(data.name,data.auth_token).then(res =>{
+        console.log(res)
+        commit("newListe_API", res);
+        return res
+    }).catch(error =>{
+        commit("newListe", data.name);
+        return console.error(error)
     })
 }
 
@@ -23,6 +44,16 @@ export const modify_todo = ({ commit }, data) =>{
     })
 };
 
+export const suppTodoList = ({ commit }, data) =>  {
+    return api.deleteTodoList(data.id,data.auth_token).then(res =>{
+        console.log(res)
+        commit("suppTodoList", data.id);
+        return res
+    }).catch(error =>{
+        return console.error(error)
+    })
+}
+
 export function supp_Todo({ commit }, data) {
     commit("suppTodo",data.todo);
     console.log(data.todo.id)
@@ -32,26 +63,3 @@ export function supp_Todo({ commit }, data) {
         console.error(error)
     })
 }
-
-export function setCurrentList({ commit }, id) {
-    commit("setCurrentList", id);
-}
-
-
-export const newListe_API = ({ commit }, data) =>  {
-    return api.createTodoList(data,data.auth_token).then(res =>{
-        commit("newListe_API", res);
-        return res
-    }).catch(error =>{
-        return console.error(error)
-    })
-}
-
-export const getListe_API = ({ commit }, data) => {
-    return api.getTodoList(data.auth_token).then(res => {
-        commit("setTodoLists",res);
-    }).catch(error => {
-        return error.response.status
-    })
-    //return state.todolists.find((todolist) => todolist.id === state.current_list);
-};

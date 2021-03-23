@@ -8,7 +8,7 @@ export function login({ commit }, data){
                 if(res.status===200)
                 {
                     commit("setAuthToken",res.data.token)
-                    router.push("/home")
+                    router.push("/")
                 }
             }
             else{
@@ -41,4 +41,5 @@ export function register({commit}, data)
 export function logout({commit})
 {
     commit("unsetAuthToken")
+    router.push("/login");
 }
